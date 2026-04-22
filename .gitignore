@@ -78,6 +78,11 @@ htmlcov/
 *.temp
 ~$*
 
+# JavaScript frontend
+node_modules/
+frontend/node_modules/
+frontend/.vite/
+
 # Model files
 *.pkl
 *.joblib
