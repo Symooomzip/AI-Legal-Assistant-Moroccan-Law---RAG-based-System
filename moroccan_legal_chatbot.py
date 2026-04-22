@@ -1077,7 +1077,7 @@ Besoin d'aide? Essayez: "Quels sont les conditions du mariage?" ou "ما هي ع
 # GRADIO INTERFACE
 # ============================================================================
 def create_gradio_interface():
-    """Premium Gradio interface for legal consultation."""
+    """Lightweight and professional Gradio interface."""
 
     try:
         chatbot_instance = AdvancedLegalChatbot()
@@ -1143,76 +1143,53 @@ Related laws:
 
     custom_css = """
     .gradio-container {
-        max-width: 1320px !important;
+        max-width: 1240px !important;
         margin: 0 auto !important;
-        padding: 1.5rem !important;
-        background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%) !important;
-    }
-
-    .legal-shell {
-        background: #ffffff !important;
-        border: 1px solid #dbe3ee !important;
-        border-radius: 18px !important;
-        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08) !important;
-        padding: 1.25rem !important;
-        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+        background: #f3f6fa !important;
     }
 
     .app-header {
-        background: linear-gradient(135deg, #0f2747 0%, #1d3557 70%, #27496d 100%) !important;
-        color: #f8fafc !important;
-        border-radius: 14px !important;
-        padding: 2.1rem !important;
-        margin-bottom: 1.1rem !important;
-        box-shadow: 0 14px 30px rgba(15, 39, 71, 0.28) !important;
+        background: #0f2747 !important;
+        border-radius: 10px !important;
+        padding: 1.4rem !important;
+        margin-bottom: 0.9rem !important;
     }
 
     .app-header h1 {
         margin: 0 !important;
-        font-size: 2.05rem !important;
-        letter-spacing: -0.02em !important;
+        color: #ffffff !important;
+        font-size: 1.75rem !important;
         font-weight: 700 !important;
-        color: #f8fafc !important;
     }
 
-    .app-header .subtitle {
-        margin-top: 0.65rem !important;
-        font-size: 1rem !important;
-        color: #cbd8ea !important;
+    .app-header p {
+        margin: 0.45rem 0 0 0 !important;
+        color: #d6e2f0 !important;
+        font-size: 0.95rem !important;
     }
 
-    .app-header .meta {
-        margin-top: 0.85rem !important;
-        font-size: 0.92rem !important;
-        color: #9fb4cf !important;
-    }
-
-    .surface-card {
+    .panel {
         background: #ffffff !important;
-        border: 1px solid #dde4ed !important;
-        border-radius: 12px !important;
-        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05) !important;
-        padding: 1rem !important;
+        border: 1px solid #d8e1ea !important;
+        border-radius: 10px !important;
+        padding: 0.9rem !important;
     }
 
     .gradio-container [data-testid="chatbot"] {
-        border: 1px solid #d6deea !important;
-        border-radius: 14px !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 14px rgba(15, 23, 42, 0.05) !important;
+        border: 1px solid #d8e1ea !important;
+        border-radius: 10px !important;
     }
 
     .gradio-container [data-testid="user"] .message,
     .gradio-container .message.user {
-        background: linear-gradient(135deg, #1d4e89 0%, #1a659e 100%) !important;
+        background: #1f4d83 !important;
         color: #ffffff !important;
+        border-radius: 10px !important;
         border: none !important;
-        border-radius: 12px !important;
-        padding: 1rem 1.05rem !important;
-        box-shadow: 0 6px 14px rgba(29, 78, 137, 0.25) !important;
     }
 
-    .gradio-container [data-testid="user"] .message *,
-    .gradio-container .message.user * {
+    .gradio-container [data-testid="user"] .message * {
         color: #ffffff !important;
     }
 
@@ -1220,100 +1197,62 @@ Related laws:
     .gradio-container .message.bot {
         background: #f8fbff !important;
         color: #0f172a !important;
-        border: 1px solid #d7e2f0 !important;
-        border-radius: 12px !important;
-        padding: 1rem 1.05rem !important;
-    }
-
-    .gradio-container [data-testid="bot"] .message *,
-    .gradio-container .message.bot * {
-        color: #0f172a !important;
+        border: 1px solid #dce6f1 !important;
+        border-radius: 10px !important;
     }
 
     .gradio-container textarea,
     .gradio-container input[type="text"] {
-        border: 1px solid #cdd8e7 !important;
-        border-radius: 10px !important;
+        border: 1px solid #cad5e3 !important;
+        border-radius: 9px !important;
         background: #ffffff !important;
         color: #0f172a !important;
-        padding: 0.9rem !important;
-        font-size: 0.99rem !important;
     }
 
     .gradio-container textarea:focus,
     .gradio-container input[type="text"]:focus {
-        border-color: #335f97 !important;
-        box-shadow: 0 0 0 3px rgba(51, 95, 151, 0.15) !important;
+        border-color: #1f4d83 !important;
+        box-shadow: 0 0 0 2px rgba(31, 77, 131, 0.15) !important;
     }
 
     .gradio-container button[variant="primary"] {
-        background: linear-gradient(135deg, #1d4e89 0%, #234d88 100%) !important;
-        border: 1px solid #1f3f70 !important;
+        background: #1f4d83 !important;
+        border: 1px solid #193f6b !important;
         color: #ffffff !important;
-        border-radius: 10px !important;
+        border-radius: 9px !important;
         font-weight: 600 !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 8px 16px rgba(24, 60, 106, 0.22) !important;
-    }
-
-    .gradio-container button[variant="primary"]:hover {
-        transform: translateY(-1px) !important;
-        box-shadow: 0 12px 20px rgba(24, 60, 106, 0.28) !important;
     }
 
     .neutral-btn {
-        border: 1px solid #c7d2e3 !important;
-        border-radius: 10px !important;
         background: #ffffff !important;
         color: #334155 !important;
+        border: 1px solid #cad5e3 !important;
+        border-radius: 9px !important;
     }
 
-    .panel-title {
-        font-weight: 700 !important;
-        color: #0f2747 !important;
-        margin-bottom: 0.45rem !important;
-    }
-
-    .quiet-note {
-        color: #5b6b80 !important;
-        font-size: 0.93rem !important;
-        line-height: 1.45 !important;
-    }
-
-    .trust-disclaimer {
-        background: #f8fafc !important;
-        border-left: 4px solid #3b4f68 !important;
-        border-radius: 10px !important;
-        padding: 0.95rem 1rem !important;
-        margin-top: 0.75rem !important;
-    }
-
-    .trust-disclaimer p,
-    .trust-disclaimer li {
-        color: #334155 !important;
+    .meta-text {
+        color: #5a6777 !important;
         font-size: 0.92rem !important;
         line-height: 1.45 !important;
     }
 
+    .disclaimer {
+        border-left: 4px solid #41566f !important;
+        background: #f8fafd !important;
+        padding: 0.8rem !important;
+        border-radius: 8px !important;
+    }
+
     .analysis-output textarea {
-        font-family: "Cascadia Code", "Consolas", monospace !important;
+        font-family: "Consolas", monospace !important;
         background: #0f172a !important;
         color: #e2e8f0 !important;
         border: 1px solid #334155 !important;
     }
 
-    .rtl-support {
-        direction: rtl !important;
-        text-align: right !important;
-        font-family: "Tahoma", "Arial", sans-serif !important;
-    }
-
     @media (max-width: 900px) {
-        .gradio-container {
-            padding: 1rem !important;
-        }
         .app-header h1 {
-            font-size: 1.65rem !important;
+            font-size: 1.45rem !important;
         }
     }
     """
@@ -1328,150 +1267,157 @@ Related laws:
             "sans-serif",
         ],
     ).set(
-        block_radius="10px",
+        block_radius="8px",
         button_primary_background_fill="#1d4e89",
         button_primary_background_fill_hover="#173d6f",
         button_primary_border_color="#1f3f70",
         button_primary_text_color="#ffffff",
-        body_background_fill="#eef2f7",
+        body_background_fill="#f3f6fa",
     )
 
     with gr.Blocks(title="Moroccan Legal Assistant", css=custom_css, theme=legal_theme) as demo:
-        with gr.Column(elem_classes="legal-shell"):
+        gr.HTML(
+            """
+            <div class="app-header">
+                <h1>Moroccan Legal AI Assistant</h1>
+                <p>Professional legal research and document review for Moroccan law.</p>
+            </div>
+            """
+        )
+
+        section_selector = gr.Radio(
+            choices=["Consultation", "Document Review", "About"],
+            value="Consultation",
+            label="Section",
+        )
+
+        with gr.Group(visible=True) as consultation_section:
+            with gr.Row():
+                with gr.Column(scale=3):
+                    with gr.Column(elem_classes="panel"):
+                        gr.Markdown("### Legal Consultation")
+                        chatbot = gr.Chatbot(
+                            label="Conversation",
+                            height=520,
+                            show_label=True,
+                        )
+                        msg = gr.Textbox(
+                            label="Question",
+                            placeholder="Ask in French or Arabic, and include legal context if available.",
+                            lines=2,
+                        )
+                        with gr.Row():
+                            submit = gr.Button("Submit Question", variant="primary")
+                            upload_btn = gr.File(
+                                label="Attach PDF",
+                                file_types=[".pdf"],
+                            )
+                            clear = gr.Button("Clear", elem_classes="neutral-btn")
+
+                with gr.Column(scale=2):
+                    with gr.Column(elem_classes="panel"):
+                        gr.Markdown("### Suggested Prompts")
+                        gr.Examples(
+                            examples=[
+                                ["Quelle est la procédure de divorce pour discorde selon la Moudawana ?"],
+                                ["ما هي عقوبة السرقة الموصوفة في القانون الجنائي المغربي؟"],
+                                ["Expliquez l'article 16 de la Constitution marocaine."],
+                                ["Quels sont les droits de garde après divorce ?"],
+                            ],
+                            inputs=msg,
+                        )
+                    with gr.Column(elem_classes="panel"):
+                        gr.Markdown("### Usage Guidance")
+                        gr.Markdown(
+                            """
+                            <p class="meta-text">
+                            Mention article numbers when possible and include factual context to improve response precision.
+                            </p>
+                            """,
+                        )
+                        gr.HTML(
+                            """
+                            <div class="disclaimer">
+                                <p class="meta-text"><strong>Notice:</strong> This assistant is informational and does not replace a licensed lawyer.</p>
+                            </div>
+                            """
+                        )
+
+        with gr.Group(visible=False) as document_section:
+            gr.Markdown("### Legal Document Review")
+            with gr.Row():
+                with gr.Column(scale=1):
+                    with gr.Column(elem_classes="panel"):
+                        doc_upload = gr.File(
+                            label="Upload Legal Document (PDF)",
+                            file_types=[".pdf"],
+                        )
+                        analyze_btn = gr.Button("Run Document Analysis", variant="primary")
+                        gr.Markdown(
+                            """
+                            - Summary and metadata extraction
+                            - Relevant law references
+                            - Key legal issue highlighting
+                            """
+                        )
+                with gr.Column(scale=2):
+                    analysis_output = gr.Textbox(
+                        label="Analysis Report",
+                        lines=24,
+                        elem_classes="analysis-output",
+                    )
+
+        with gr.Group(visible=False) as about_section:
+            gr.Markdown(
+                """
+                ## Platform Overview
+
+                Moroccan Legal AI Assistant is designed for legal research, article-level referencing, and bilingual consultation support.
+
+                ### Core capabilities
+                - Hybrid legal retrieval with semantic ranking
+                - Article detection and citation guidance
+                - Bilingual support in French and Arabic
+                - Document review with legal-context matching
+
+                ### Knowledge coverage
+                - Family law (Moudawana)
+                - Criminal law
+                - Civil law
+                - Constitutional law
+                """
+            )
             gr.HTML(
                 """
-                <div class="app-header">
-                    <h1>Moroccan Legal AI Assistant</h1>
-                    <p class="subtitle">Professional legal research and document review for Moroccan law.</p>
-                    <p class="meta">Version 3.0 Professional Edition | Production-ready legal knowledge base</p>
+                <div class="disclaimer">
+                    <p class="meta-text"><strong>Legal disclaimer:</strong> Output is informational and should be verified by a licensed legal professional before use in legal decisions.</p>
                 </div>
                 """
             )
 
-            with gr.Tabs():
-                with gr.Tab("Consultation"):
-                    with gr.Row():
-                        with gr.Column(scale=3):
-                            with gr.Column(elem_classes="surface-card"):
-                                gr.Markdown("### Legal Consultation")
-                                chatbot = gr.Chatbot(
-                                    label="Conversation",
-                                    height=560,
-                                    show_label=True,
-                                )
-                                msg = gr.Textbox(
-                                    label="Question",
-                                    placeholder="Ask in French or Arabic. Example: article number, legal procedure, or document interpretation.",
-                                    lines=3,
-                                )
-                                with gr.Row():
-                                    submit = gr.Button("Submit Question", variant="primary")
-                                    upload_btn = gr.File(
-                                        label="Attach PDF for Context",
-                                        file_types=[".pdf"],
-                                    )
-                                    clear = gr.Button("Clear Conversation", elem_classes="neutral-btn")
+        def switch_section(selected_section):
+            return (
+                gr.update(visible=selected_section == "Consultation"),
+                gr.update(visible=selected_section == "Document Review"),
+                gr.update(visible=selected_section == "About"),
+            )
 
-                        with gr.Column(scale=2):
-                            with gr.Column(elem_classes="surface-card"):
-                                gr.Markdown("### Suggested Prompts")
-                                gr.Examples(
-                                    examples=[
-                                        ["Quelle est la procédure de divorce pour discorde selon la Moudawana ?"],
-                                        ["ما هي عقوبة السرقة الموصوفة في القانون الجنائي المغربي؟"],
-                                        ["Expliquez l'article 16 de la Constitution marocaine."],
-                                        ["Quels sont les droits de garde après divorce ?"],
-                                        ["ما هي شروط صحة العقد في القانون المدني؟"],
-                                    ],
-                                    inputs=msg,
-                                )
-                            with gr.Column(elem_classes="surface-card"):
-                                gr.Markdown("### Consultation Settings")
-                                gr.Markdown(
-                                    """
-                                    <p class="quiet-note">
-                                    Use precise legal wording, mention article numbers when known,
-                                    and provide factual context to improve answer quality.
-                                    </p>
-                                    """,
-                                )
-                                gr.HTML(
-                                    """
-                                    <div class="trust-disclaimer">
-                                        <p><strong>Professional Notice:</strong> This assistant provides legal information and research support.
-                                        It does not replace case-specific advice from a licensed lawyer.</p>
-                                    </div>
-                                    """
-                                )
+        section_selector.change(
+            fn=switch_section,
+            inputs=section_selector,
+            outputs=[consultation_section, document_section, about_section],
+            queue=False,
+        )
 
-                    def handle_submit(message, history, file):
-                        if not message or not message.strip():
-                            return history, ""
-                        return chat_with_upload(message, history, file), ""
+        def handle_submit(message, history, file):
+            if not message or not message.strip():
+                return history, ""
+            return chat_with_upload(message, history, file), ""
 
-                    msg.submit(handle_submit, [msg, chatbot, upload_btn], [chatbot, msg])
-                    submit.click(handle_submit, [msg, chatbot, upload_btn], [chatbot, msg])
-                    clear.click(lambda: ([], ""), None, [chatbot, msg], queue=False)
-
-                with gr.Tab("Document Review"):
-                    gr.Markdown(
-                        """
-                        ### Legal Document Review
-                        Upload a legal PDF to generate metadata, structured summary, and related legal references.
-                        """
-                    )
-                    with gr.Row():
-                        with gr.Column(scale=1):
-                            with gr.Column(elem_classes="surface-card"):
-                                doc_upload = gr.File(
-                                    label="Upload Legal Document (PDF)",
-                                    file_types=[".pdf"],
-                                )
-                                analyze_btn = gr.Button("Run Document Analysis", variant="primary")
-                                gr.Markdown(
-                                    """
-                                    - Summary and metadata extraction
-                                    - Relevant law references
-                                    - Key legal issues detection
-                                    - Expert-style recommendations
-                                    """
-                                )
-                        with gr.Column(scale=2):
-                            analysis_output = gr.Textbox(
-                                label="Analysis Report",
-                                lines=28,
-                                elem_classes="analysis-output",
-                            )
-
-                    analyze_btn.click(analyze_document, inputs=doc_upload, outputs=analysis_output)
-
-                with gr.Tab("About"):
-                    gr.Markdown(
-                        """
-                        ## Platform Overview
-
-                        Moroccan Legal AI Assistant is designed for legal research, article-level referencing, and bilingual consultation support.
-
-                        ### Core capabilities
-                        - Hybrid legal retrieval with semantic ranking
-                        - Article detection and citation guidance
-                        - Bilingual support in French and Arabic
-                        - Document review with legal-context matching
-
-                        ### Knowledge coverage
-                        - Family law (Moudawana)
-                        - Criminal law
-                        - Civil law
-                        - Constitutional law
-                        """
-                    )
-                    gr.HTML(
-                        """
-                        <div class="trust-disclaimer">
-                            <p><strong>Legal disclaimer:</strong> Output is informational and should be verified by a licensed legal professional before use in any decision, filing, or legal action.</p>
-                        </div>
-                        """
-                    )
+        msg.submit(handle_submit, [msg, chatbot, upload_btn], [chatbot, msg])
+        submit.click(handle_submit, [msg, chatbot, upload_btn], [chatbot, msg])
+        clear.click(lambda: ([], ""), None, [chatbot, msg], queue=False)
+        analyze_btn.click(analyze_document, inputs=doc_upload, outputs=analysis_output)
 
     return demo
 

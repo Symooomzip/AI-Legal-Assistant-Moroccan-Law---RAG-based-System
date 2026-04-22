@@ -1,404 +1,249 @@
-# ⚖️ Moroccan Legal AI Chatbot
+# Moroccan Legal AI Assistant
 
-### Advanced RAG System for Legal Consultation
+Professional legal consultation and document intelligence for Moroccan law, powered by a Retrieval-Augmented Generation (RAG) pipeline.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
-![AI](https://img.shields.io/badge/AI-RAG%20System-green?logo=openai)
-![ChromaDB](https://img.shields.io/badge/Vector%20DB-ChromaDB-orange?logo=database)
-![Gradio](https://img.shields.io/badge/UI-Gradio-red?logo=gradio)
-
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
+- [Current Architecture](#current-architecture)
+- [Requirements](#requirements)
+- [Setup](#setup)
+- [Run the Project](#run-the-project)
 - [Project Structure](#project-structure)
-- [Technical Details](#technical-details)
-- [Legal Domains](#legal-domains)
+- [Configuration Notes](#configuration-notes)
+- [Troubleshooting](#troubleshooting)
+- [Security and Legal Notice](#security-and-legal-notice)
 
-## 🌟 Overview
+## Overview
 
-A production-grade AI chatbot specialized in Moroccan law, providing intelligent legal consultations based on:
+The assistant is specialized in Moroccan legal domains (family, criminal, civil, constitutional law) and supports French and Arabic queries.
 
-- **Moudawana** (Moroccan Family Code 2004)
-- **Code Pénal Marocain** (Moroccan Criminal Code)
+Core capabilities:
 
-The system uses advanced **Retrieval-Augmented Generation (RAG)** to provide accurate, context-aware legal information in both French and Arabic.
+- Multi-backend LLM fallback (OpenRouter, Groq, OpenAI)
+- Hybrid legal retrieval over ChromaDB
+- PDF legal document analysis
+- Article extraction and source citation
+- Bilingual legal interaction
 
-## ✨ Features
+## Current Architecture
 
-### Core Capabilities
+The project now uses a separated frontend/backend stack:
 
-- 🤖 **Multi-Backend AI**: Automatic fallback between OpenRouter, Groq, and OpenAI
-- 📚 **RAG System**: Vector database with semantic search
-- 🌍 **Bilingual**: Full support for French and Arabic
-- ⚖️ **Legal Expertise**: Specialized in Moroccan family and criminal law
-- 📊 **Analytics**: Comprehensive metrics and cost tracking
-- 🔒 **Professional**: Legal disclaimers and ethical guidelines
+- Frontend: React + Vite (`frontend/`)
+- Backend API: FastAPI (`legal_api_server.py`)
+- Core legal engine: Python RAG pipeline (`moroccan_legal_chatbot.py`)
 
-### Advanced Features
+Flow:
 
-- **Automatic Query Classification**: Identifies query type and legal domain
-- **Case Analysis Mode**: Structured legal consultation for specific cases
-- **Document Processing**: PDF extraction with intelligent chunking
-- **Fallback Architecture**: Ensures 99.9% uptime across multiple AI providers
-- **Cost Optimization**: Token tracking and cost management
-- **Logging System**: Professional logging for debugging and auditing
+1. User interacts with React UI (`localhost:5173`)
+2. Frontend calls FastAPI endpoints (`localhost:8000`)
+3. API delegates to the legal engine
+4. Legal engine performs retrieval + generation and returns response
 
-## 🏗️ Architecture
+Legacy mode is still available:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     User Interface (Gradio)                  │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────────┐
-│                  Query Classifier                            │
-│         (Determines Query Type & Legal Domain)               │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────────┐
-│              Vector Database (ChromaDB)                      │
-│         Semantic Search → Retrieve Relevant Docs             │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────────┐
-│           Multi-Backend Manager (with Fallback)              │
-│   Priority 1: OpenRouter (GPT-4o-mini)                       │
-│   Priority 2: Groq (Llama 3.3 70B)                           │
-│   Priority 3: OpenAI (GPT-4o-mini)                           │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-┌────────────────────────▼────────────────────────────────────┐
-│              Response Generation + Disclaimer                │
-└─────────────────────────────────────────────────────────────┘
-```
+- `python moroccan_legal_chatbot.py` launches the integrated Gradio interface.
 
-### Technology Stack
+## Requirements
 
-| Component          | Technology             | Purpose                            |
-| ------------------ | ---------------------- | ---------------------------------- |
-| **Vector DB**      | ChromaDB               | Semantic search & document storage |
-| **Embeddings**     | Sentence Transformers  | Multilingual text embeddings       |
-| **LLM**            | OpenRouter/Groq/OpenAI | Response generation                |
-| **UI**             | Gradio                 | Web interface                      |
-| **PDF Processing** | PyPDF                  | Document extraction                |
-| **Logging**        | Python logging         | System monitoring                  |
+### Backend
 
-## 🚀 Installation
+- Python 3.10+ recommended
+- A virtual environment
+- At least one API key:
+  - `OPENROUTER_API_KEY`
+  - `GROQ_API_KEY`
+  - `OPENAI_API_KEY`
 
-### Prerequisites
+### Frontend
 
-- Python 3.8 or higher
-- API keys for at least one backend:
-  - OpenRouter API key (recommended)
-  - Groq API key (free, fast)
-  - OpenAI API key (fallback)
+- Node.js LTS (includes npm)
+- npm 10+ recommended
 
-### Step 1: Clone the Repository
+## Setup
+
+### 1) Clone and enter project
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/moroccan-legal-chatbot.git
+git clone https://github.com/symooomzip/moroccan-legal-chatbot.git
 cd moroccan-legal-chatbot
 ```
 
-### Step 2: Create Virtual Environment
+### 2) Create and activate virtual environment
 
 ```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
+python -m venv .venv
 ```
 
-### Step 3: Install Dependencies
+Windows (PowerShell):
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Windows (CMD):
+
+```bat
+.\.venv\Scripts\activate
+```
+
+Linux/Mac:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3) Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4: Set Up Environment Variables
+### 4) Configure `.env`
 
-Create a `.env` file in the project root:
+Create `.env` in project root:
 
 ```env
-# API Keys (at least one required)
 OPENROUTER_API_KEY=your_openrouter_key_here
 GROQ_API_KEY=your_groq_key_here
 OPENAI_API_KEY=your_openai_key_here
-
-# Optional: Custom Configuration
-CHROMA_DB_PATH=./chroma_db
-LEGAL_DOCS_PATH=./legal_docs
 ```
 
-### Step 5: Prepare Legal Documents
-
-Place your PDF legal documents in the `legal_docs/` directory:
-
-```
-legal_docs/
-├── family_law/
-│   ├── moudawana_2004.pdf
-│   └── family_code_articles.pdf
-└── criminal_law/
-    ├── code_penal_marocain.pdf
-    └── criminal_procedures.pdf
-```
-
-## ⚙️ Configuration
-
-### Backend Configuration
-
-The system uses a priority-based fallback system:
-
-1. **OpenRouter** (Priority 1)
-   - Model: `openai/gpt-4o-mini`
-   - Cost: $0.00015 per 1K tokens
-   - Best for: Production use
-
-2. **Groq** (Priority 2)
-   - Model: `llama-3.3-70b-versatile`
-   - Cost: Free
-   - Best for: Development & testing
-
-3. **OpenAI** (Priority 3)
-   - Model: `gpt-4o-mini`
-   - Cost: $0.00015 per 1K tokens
-   - Best for: Fallback
-
-### Customization
-
-Edit `moroccan_legal_chatbot.py` to customize:
-
-```python
-class Config:
-    # Vector Database
-    EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-    TOP_K_RESULTS = 5  # Number of relevant documents to retrieve
-
-    # Text Processing
-    CHUNK_SIZE = 1000  # Characters per chunk
-    CHUNK_OVERLAP = 200  # Overlap between chunks
-
-    # AI Generation
-    MAX_RETRIES = 3
-    TIMEOUT_SECONDS = 30
-```
-
-## 💻 Usage
-
-### Starting the Chatbot
+### 5) Install frontend dependencies
 
 ```bash
-python moroccan_legal_chatbot.py
+cd frontend
+npm install
 ```
 
-The Gradio interface will launch at `http://localhost:7860`
+If npm is not recognized in your current terminal on Windows:
 
-### Using the Web Interface
-
-1. **General Questions**
-
-   ```
-   Quels sont les conditions du mariage selon la Moudawana?
-   ما هي شروط الزواج حسب مدونة الأسرة؟
-   ```
-
-2. **Case Consultation**
-
-   ```
-   Mon mari refuse de payer la pension alimentaire. Que faire?
-   زوجي يرفض دفع النفقة. ماذا أفعل؟
-   ```
-
-3. **Legal Research**
-   ```
-   Quelles sont les peines pour vol avec violence?
-   ما هي العقوبات على السرقة مع العنف؟
-   ```
-
-## 📁 Project Structure
-
-```
-moroccan-legal-chatbot/
-├── moroccan_legal_chatbot.py    # Main application
-├── requirements.txt             # Python dependencies
-├── .env                        # Environment variables (create this)
-├── .gitignore                  # Git ignore rules
-├── README.md                   # This file
-│
-├── legal_docs/                 # Legal documents (PDFs)
-│   ├── family_law/
-│   │   └── *.pdf
-│   └── criminal_law/
-│       └── *.pdf
-│
-├── chroma_db/                  # Vector database (auto-generated)
-│   └── [database files]
-│
-└── legal_chatbot.log           # Application logs
+```bat
+set "PATH=C:\Program Files\nodejs;%PATH%"
+"C:\Program Files\nodejs\npm.cmd" install
 ```
 
-## 🔧 Technical Details
+## Run the Project
 
-### Document Processing Pipeline
+You need two terminals.
 
-1. **PDF Extraction**
-   - Reads PDF files using PyPDF
-   - Handles multi-page documents
-   - Error recovery for corrupted pages
+### Terminal A - Backend API
 
-2. **Text Chunking**
-   - Smart boundary detection (sentences, paragraphs)
-   - Configurable chunk size and overlap
-   - Preserves context across chunks
+From project root:
 
-3. **Embedding Generation**
-   - Multilingual sentence transformers
-   - 384-dimensional vectors
-   - Optimized for French and Arabic
-
-4. **Vector Storage**
-   - ChromaDB persistent storage
-   - Metadata tagging (category, source, chunk index)
-   - Fast semantic search
-
-### Query Processing
-
-```python
-# Query Classification
-query_type, legal_domain = QueryClassifier.classify_query(user_query)
-
-# Vector Search
-relevant_docs = vector_db.search(
-    query=user_query,
-    n_results=5,
-    filter_category=legal_domain
-)
-
-# Response Generation with Fallback
-response, backend, tokens, cost = backend_manager.generate_response(
-    prompt=user_query,
-    context=relevant_docs
-)
+```powershell
+cd "D:\master\School\S9\Application avancees en Intelligence Artificielle\Chatbot_prj"
+.\.venv\Scripts\Activate.ps1
+python -m uvicorn legal_api_server:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-## ⚖️ Legal Domains
+### Terminal B - Frontend
 
-### Family Law (Moudawana 2004)
+From `frontend/`:
 
-Covers:
-
-- Marriage conditions and procedures
-- Divorce (Talaq, Khul', judicial divorce)
-- Child custody (Hadana)
-- Alimony and financial support
-- Inheritance rights
-- Guardianship
-
-### Criminal Law (Code Pénal)
-
-Covers:
-
-- Theft and robbery
-- Assault and violence
-- Fraud and embezzlement
-- Murder and manslaughter
-- Kidnapping
-- Sexual offenses
-
-## 📊 Performance
-
-### Benchmarks
-
-| Metric                 | Value                 |
-| ---------------------- | --------------------- |
-| Average Response Time  | 2-4 seconds           |
-| Accuracy (on test set) | 92%                   |
-| Uptime                 | 99.9% (with fallback) |
-| Cost per Query         | $0.0003 - $0.0008     |
-| Supported Languages    | French, Arabic        |
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**1. "All backends failed"**
-
-```bash
-# Check API keys in .env file
-# Verify internet connection
+```powershell
+cd "D:\master\School\S9\Application avancees en Intelligence Artificielle\Chatbot_prj\frontend"
+npm run dev
 ```
 
-**2. "No documents found"**
+Open:
 
-```bash
-# Verify PDF files exist in legal_docs/
-ls legal_docs/family_law/
-ls legal_docs/criminal_law/
+- Frontend UI: [http://localhost:5173](http://localhost:5173)
+- API health: [http://localhost:8000/health](http://localhost:8000/health)
+
+## Project Structure
+
+```text
+Chatbot_prj/
+├── moroccan_legal_chatbot.py      # Core legal engine + legacy Gradio UI
+├── legal_api_server.py            # FastAPI wrapper for React frontend
+├── requirements.txt
+├── .env
+├── README.md
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx
+│       ├── api.js
+│       ├── main.jsx
+│       └── styles.css
+├── legal_docs/                    # PDF corpus grouped by legal domain
+├── chroma_db/                     # Generated vector database
+└── user_uploads/                  # Temporary uploaded documents
 ```
 
-**3. "ChromaDB error"**
+## Configuration Notes
 
-```bash
-# Delete and rebuild database
-rm -rf chroma_db/
-python moroccan_legal_chatbot.py
+Main runtime configuration lives in `moroccan_legal_chatbot.py` under `Config`.
+
+Important settings:
+
+- `EMBEDDING_MODEL`
+- `CHROMA_DB_PATH`
+- `LEGAL_DOCS_PATH`
+- `TOP_K_RESULTS`
+- `TIMEOUT_SECONDS`
+
+For constrained machines, keep this environment setting:
+
+```env
+TOKENIZERS_PARALLELISM=false
 ```
 
-## 🔒 Security & Privacy
+## Troubleshooting
 
-### Best Practices
+### `npm` not recognized
 
-- ✅ API keys stored in `.env` (never commit)
-- ✅ No user data stored permanently
-- ✅ Logs contain no personal information
-- ✅ HTTPS recommended for production
-- ✅ Legal disclaimers on all responses
+1. Install Node.js LTS from [nodejs.org](https://nodejs.org)
+2. Fully restart terminal/Cursor
+3. Verify:
 
-## 🎓 Academic Context
+```bat
+node -v
+npm -v
+```
 
-**Course**: M2 Advanced Applications in Artificial Intelligence  
-**Version**: 2.1.0  
-**Date**: January 2026
+### `npm run dev` fails with `ENOENT package.json`
 
-### Key Concepts Demonstrated
+You are running the command from project root. Move to `frontend/` first:
 
-- Retrieval-Augmented Generation (RAG)
-- Vector databases and semantic search
-- Multi-backend architecture with fallback
-- Natural Language Processing (NLP)
-- Document processing and chunking
-- Production-grade logging and monitoring
+```bat
+cd frontend
+npm run dev
+```
 
-## 📄 License
+### `npm run dev` fails with `"node" is not recognized`
 
-This project is licensed under the MIT License.
+Current terminal does not include Node in PATH. Fix this session:
 
-## 👥 Author
+```bat
+set "PATH=C:\Program Files\nodejs;%PATH%"
+npm run dev
+```
 
-**Lubabah HAMOUCH**
+### Backend memory allocation error at startup
 
-- M2 Data Science Student
-- Specialization: AI & NLP
+If you see errors like `memory allocation ... bytes failed`:
 
-## 📧 Contact
+- Close heavy applications
+- Increase Windows page file/virtual memory
+- Keep `TOKENIZERS_PARALLELISM=false`
+- Retry backend start
 
-For questions or collaboration:
+### API starts but frontend cannot connect
 
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- Email: your.email@example.com
+- Confirm backend is running on port 8000
+- Confirm frontend is running on port 5173
+- Open [http://localhost:8000/health](http://localhost:8000/health)
+
+## Security and Legal Notice
+
+- Store API keys only in `.env` and never commit secrets
+- Validate generated outputs with a qualified legal professional
+- This system provides legal information support, not legal representation
 
 ---
 
-**Built with ⚖️ for Justice and Legal Accessibility**
-
-> **Disclaimer**: This chatbot provides general legal information based on Moroccan law. It does NOT constitute legal advice. Always consult a qualified lawyer for your specific situation.
+This project is part of an academic AI application workflow and is continuously improved for stability, UI quality, and legal retrieval accuracy.

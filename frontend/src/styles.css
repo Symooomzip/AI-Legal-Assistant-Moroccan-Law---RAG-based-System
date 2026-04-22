@@ -1,0 +1,242 @@
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #0f172a;
+  background: #f3f6fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f6fa;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  background: #0f2747;
+  color: #ffffff;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.app-header p {
+  margin: 0.4rem 0 0;
+  color: #c8d7ec;
+}
+
+.status-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.nav {
+  margin-top: 0.9rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.nav-item {
+  border: 1px solid #cdd8e7;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  border-color: #1d4e89;
+  background: #eaf1fb;
+  color: #1d4e89;
+  font-weight: 600;
+}
+
+.main {
+  margin-top: 0.9rem;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #d8e1ea;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.chat-window {
+  border: 1px solid #d8e1ea;
+  border-radius: 10px;
+  padding: 0.8rem;
+  min-height: 340px;
+  max-height: 440px;
+  overflow-y: auto;
+  background: #f8fbff;
+}
+
+.bubble {
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.bubble strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.bubble.user {
+  background: #1f4d83;
+  color: #ffffff;
+}
+
+.bubble.assistant {
+  background: #ffffff;
+  border: 1px solid #d9e4f2;
+}
+
+.bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.chat-form {
+  margin-top: 0.8rem;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid #cdd8e7;
+  border-radius: 8px;
+  padding: 0.65rem;
+  font-family: inherit;
+}
+
+.suggested-prompts {
+  margin-top: 0.75rem;
+}
+
+.suggested-prompts-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.suggested-prompts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.prompt-chip {
+  border: 1px solid #cdd8e7;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #1d4e89;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.prompt-chip:hover {
+  background: #eaf1fb;
+  border-color: #1d4e89;
+}
+
+.actions {
+  margin-top: 0.65rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid #cdd8e7;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #1f4d83;
+  border-color: #1a3f6b;
+  color: #ffffff;
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #334155;
+}
+
+.doc-form {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.analysis-box {
+  margin-top: 1rem;
+  border: 1px solid #d8e1ea;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.analysis-box pre {
+  white-space: pre-wrap;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 0.7rem;
+}
+
+.error {
+  color: #b91c1c;
+  margin-top: 0.7rem;
+}
+
+.muted {
+  color: #64748b;
+}
+
+@media (max-width: 900px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .status-panel {
+    align-items: flex-start;
+  }
+
+  .doc-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
