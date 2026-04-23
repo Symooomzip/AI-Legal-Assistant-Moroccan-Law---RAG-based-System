@@ -247,3 +247,8 @@ If you see errors like `memory allocation ... bytes failed`:
 ---
 
 This project is part of an academic AI application workflow and is continuously improved for stability, UI quality, and legal retrieval accuracy.
+
+## 👥 Authors
+
+*   **Mohammed Fakir** - [GitHub: @Symooomzip](https://github.com/Symooomzip)
+*   **Lubabah Hamouch** - [GitHub: @Lubabah-Hamouch](https://github.com/Lubabah-Hamouch)
